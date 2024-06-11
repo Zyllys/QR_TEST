@@ -10,12 +10,12 @@ class QRScanner extends StatefulWidget {
 
 class _QRScannerState extends State<QRScanner> with WidgetsBindingObserver{
 
-  int popCounter = 0;
+  bool notPopped = true;
 
   void _handleBarcode(BarcodeCapture barcode) {
-    if(mounted && popCounter == 0) {
+    if(mounted && notPopped) {
       Navigator.pop(context,barcode.barcodes.firstOrNull);
-      popCounter++; // prevent popping multiple times, there may be a better method
+      notPopped = false; // prevent popping multiple times, there may be a better method
     }
   }
 
