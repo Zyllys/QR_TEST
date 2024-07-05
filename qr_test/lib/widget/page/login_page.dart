@@ -12,7 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late String? token;
+  String? token;
   late LoginStatus loginStatus;
 
   final _formKey = GlobalKey<FormState>();
@@ -42,6 +42,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final loginBloc = BlocProvider.of<LoginBloc>(context);
+
+    if(token != null) {
+      loginBloc.add(LoginToken(token: token!));
+    }
 
     return Scaffold(
       appBar: AppBar(

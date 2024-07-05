@@ -22,6 +22,19 @@ class LoginButtonPressed extends LoginEvent {
 
 }
 
+class LoginToken extends LoginEvent {
+  final String token;
+
+  const LoginToken({required this.token});
+
+  @override
+  List<Object> get props => [token];
+
+  @override
+  String toString() => 'LoginToken { token:$token}';
+  
+}
+
 abstract class LogoutEvent extends LoginEvent {
   const LogoutEvent();
 }
