@@ -12,8 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String username = '';
-  String password = '';
   late String? token;
   late LoginStatus loginStatus;
 
@@ -89,11 +87,6 @@ class _LoginPageState extends State<LoginPage> {
                           }
                           return null;
                         },
-                        onChanged: (value) {
-                          setState(() {
-                            username = value;
-                          });
-                        },
                       ),
                     ),
                     Padding(
@@ -113,11 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                           }
                           return null;
                         },
-                        onChanged: (value) {
-                          setState(() {
-                            password = value;
-                          });
-                        },
                       ),
                     ),
                     Padding(
@@ -127,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                             ? () {
                                 if (_formKey.currentState!.validate()) {
                                   loginBloc.add(LoginButtonPressed(
-                                      username: username, password: password));
+                                      username: _usernameController.text, password: _passwordController.text));
                                 }
                               }
                             : null,
