@@ -21,3 +21,15 @@ class LoginButtonPressed extends LoginEvent {
   String toString() => 'LoginButtonPressed { username:$username, password:$password}';
 
 }
+
+abstract class LogoutEvent extends LoginEvent {
+  const LogoutEvent();
+}
+
+class LogoutButtonPressed extends LogoutEvent {
+  const LogoutButtonPressed();
+}
+
+class LogoutTokenExpired extends LogoutEvent {
+  const LogoutTokenExpired();
+}
