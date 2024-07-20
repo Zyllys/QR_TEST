@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qr_test/class/login/login_bloc.dart';
+import 'package:qr_test/class/bloc/login/login_bloc.dart';
 
 class LogoutDialog extends StatelessWidget {
   final LoginBloc loginBloc;

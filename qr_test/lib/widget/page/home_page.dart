@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:qr_test/class/login/login_bloc.dart';
+import 'package:qr_test/class/bloc/login/login_bloc.dart';
 import 'package:qr_test/qr_scanner.dart';
+import 'package:qr_test/widget/ListView/stations_list_view_bloc_builder.dart';
 import 'package:qr_test/widget/dialog/logout_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text("Token: $token"),
             Text("QR Value: $barcodeString"),
+            const StationListViewBloc(category: 1),
           ],
         ),
       ),

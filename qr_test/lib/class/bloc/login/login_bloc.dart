@@ -2,7 +2,7 @@ import "dart:convert";
 import 'package:http/http.dart' as http;
 import "package:bloc/bloc.dart";
 import "package:equatable/equatable.dart";
-import "package:qr_test/class/login/login_status.dart";
+import "package:qr_test/class/bloc/login/login_status.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 part 'login_event.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_test/class/login/login_bloc.dart';
-import 'package:qr_test/class/login/login_status.dart';
+import 'package:qr_test/class/bloc/login/login_bloc.dart';
+import 'package:qr_test/class/bloc/login/login_status.dart';
+import 'package:qr_test/widget/dialog/token_expired_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -55,7 +56,10 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is LoginFailure) {
-            showDialog<String>(
+            if (state.error == "Token error!.") {
+              showDialog(context: context, builder: ((context) => const TokenExpiredDialog()));
+            } else {
+              showDialog<String>(
               context: context,
               builder: (BuildContext context) => AlertDialog(
                 title: const Text('Login Failed'),
@@ -68,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             );
+            }
           }
         },
         child: BlocBuilder<LoginBloc, LoginState>(
