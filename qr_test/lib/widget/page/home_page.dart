@@ -72,6 +72,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      // body: const StationListViewBloc(category: 1),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {_awaitReturnQR(context)},
         tooltip: 'QR Scanner',
