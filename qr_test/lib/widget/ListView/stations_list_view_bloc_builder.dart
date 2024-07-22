@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_test/class/common/token_mixin.dart';
 import 'package:qr_test/class/bloc/fetch/fetch_bloc.dart';
 import 'package:qr_test/class/bloc/fetch/stations_data.dart';
+import 'package:qr_test/widget/page/station_data_page.dart';
 
 class StationListViewBloc extends StatelessWidget with Token {
   final int category;
@@ -54,7 +55,16 @@ class StationListViewBloc extends StatelessWidget with Token {
                   prototypeItem: const ListTile(title: Text("Place Holder")),
                   itemBuilder: (context, index) {
                     final Data station = Data.fromJson(state.data[index]);
-                    return ListTile(title: Text(station.name!));
+                    return ListTile(
+                      title: Text(station.name!),
+                      tileColor: Colors.blue[100],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => StationDataPage(station: station,))
+                        );
+                      },
+                    );
                   }),
             );
           }
