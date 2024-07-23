@@ -1,23 +1,60 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:qr_test/class/bloc/fetch/stations_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qr_test/class/bloc/websocket/websocket_bloc.dart';
+import 'package:qr_test/class/bloc/websocket/websocket_manager.dart';
 
 class StationDataPage extends StatelessWidget {
   //TODO: rename Data class name
   final Data station;
-
-  const StationDataPage({super.key, required this.station});
-  
+  final WebSocketManager wsManager = WebSocketManager(uri: Uri.parse("ws://10.88.10.104:3003"));
+  StationDataPage({super.key, required this.station});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const BackButton(),
-        title:  Text(station.name!),
+        leading: BackButton(
+          onPressed: () async {
+            await wsManager.disconnect().then((value) => Navigator.pop(context));
+          },
+        ),
+        title: Text(station.name!),
         centerTitle: true,
       ),
-      body: Container()
+      body: BlocProvider<WebSocketBloc>(
+        create: (context) => WebSocketBloc(),
+        child: BlocBuilder<WebSocketBloc, WebSocketState>(
+          builder: ((context, state) {
+            //set the parameters here
+            wsManager.station = [station.tablename!];
+            // wsManager.station = ['T1S39'];
+
+            wsManager.bloc = BlocProvider.of<WebSocketBloc>(context);
+            if (state is WebSocketInitial) {
+              //connect websocket
+              return Center(
+                child: TextButton(
+                  child: const Text('Connect'),
+                  onPressed: () {
+                    wsManager.connect();
+                  },
+                ),
+              );
+            } else if (state is WebSocketAuthenticating) {
+              return CircularProgressIndicator(color: state.color);
+            } else if (state is WebSocketDisconnected) {
+              return Text(state.error == null ? '' : state.error!);
+            } else if (state is WebSocketConnected) {
+              return Text(jsonEncode(state.data));
+            }
+
+            return const Text('');
+          }),
+        ),
+      ),
     );
   }
-
 }
