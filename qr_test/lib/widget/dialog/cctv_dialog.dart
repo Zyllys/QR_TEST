@@ -14,10 +14,32 @@ class _CCTVDialogState extends State<CCTVDialog> {
   late final Player player = Player();
   late final VideoController controller = VideoController(player);
 
+  final playlist = Playlist(
+    [
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/201"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/301"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/401"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/501"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/601"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/701"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/801"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/901"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/1001"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/1101"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/1201"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/1301"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/1401"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/1501"),
+      Media("rtsp://admin:rklg;biNf@192.168.10.50:554/Streaming/channels/1601"),
+      
+    ]
+  );
+
   @override
   void initState() {
     super.initState();
-    player.open(Media(widget.rtspUrl));
+    // player.open(Media(widget.rtspUrl));
+    player.open(playlist);
 
   }
 
@@ -40,8 +62,15 @@ class _CCTVDialogState extends State<CCTVDialog> {
             height: MediaQuery.of(context).size.width * 9.0 / 16.0,
             child: Video(controller: controller),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(onPressed: () async => {await player.previous()}, icon: const Icon(Icons.navigate_before, color: Colors.white,)),
+              IconButton(onPressed: () async =>{await player.next()}, icon: const Icon(Icons.navigate_next, color: Colors.white,))
+            ],
+          ),
           TextButton(
-            child: const Text('Close'),
+            child: const Text('Close', style: TextStyle(color: Colors.white),),
             onPressed: () {
               Navigator.pop(context);
             },
