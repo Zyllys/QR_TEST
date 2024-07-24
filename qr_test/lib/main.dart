@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:qr_test/class/bloc/login/login_bloc.dart';
 import 'package:qr_test/widget/page/home_page.dart';
 import 'package:qr_test/widget/page/login_page.dart';
 
 
 void main() {
+  MediaKit.ensureInitialized();
   runApp(const MyApp());
 }
 
