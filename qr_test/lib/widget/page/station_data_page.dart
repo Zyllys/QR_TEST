@@ -22,10 +22,11 @@ class StationDataPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(
-          onPressed: () async {
-            await wsManager
-                .disconnect()
-                .then((value) => Navigator.pop(context));
+          onPressed: () {
+            if (wsManager.connected) {
+              wsManager.disconnect();
+            }
+            Navigator.pop(context);
           },
         ),
         title: Text(station.name!),

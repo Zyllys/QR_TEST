@@ -9,6 +9,7 @@ class WebSocketManager with Token {
   final Uri uri;
   WebSocketBloc? wsBloc;
   late WebSocketChannel channel;
+  bool connected = false;
 
   WebSocketManager(
       {required this.uri});
@@ -37,6 +38,7 @@ class WebSocketManager with Token {
     wsBloc!.add(WebSocketConnect());
     channel = WebSocketChannel.connect(uri, protocols: wsProtocol);
     await channel.ready;
+    connected = true;
 
     //trigger bloc event and send handshake message
     wsBloc!.add(WebSocketHandshake());
