@@ -4,8 +4,6 @@ import 'package:qr_test/class/bloc/fetch/stations_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_test/class/bloc/websocket/websocket_bloc.dart';
 import 'package:qr_test/class/bloc/websocket/websocket_manager.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 import 'package:qr_test/widget/dialog/cctv_dialog.dart';
 
 class StationDataPage extends StatelessWidget {
